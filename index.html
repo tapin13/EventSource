@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EventSource - PHP Web Example</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            if(!!window.EventSource) {
+                var source = new window.EventSource('http://localhost/EventSource.php');
+            } else {
+                alert('Your browser not support EventSource');
+            }
+
+            source.addEventListener('open', function(e) {
+                console.log('Connection was opened.');
+            }, false);
+
+            source.addEventListener('error', function(e) {
+                if(e.readyState == EventSource.CLOSED) {
+                    console.log('Conection was closed.')
+                }
+            });
+    
+            source.addEventListener('message', function(e) {
+                console.log(e.data);
+            }, false);
+
+        </script>
+    </head>
+    <body>
+        <div>EventSource - PHP Web Example</div>
+    </body>
+</html>
